@@ -12,7 +12,7 @@ sub startup {
   my $r = $self->routes;
 
   # Normal route to controller
-  $r->route('/welcome')->to('example#welcome');
+  $r->route('/upload')->to('file#upload');
 }
 
 1;
