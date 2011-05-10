@@ -16,3 +16,4 @@ sub startup {
 }
 
 1;
+# ABSTRACT: Family Photo Album
