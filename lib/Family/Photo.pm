@@ -3,16 +3,20 @@ use Mojo::Base 'Mojolicious';
 
 # This method will run once at server start
 sub startup {
-  my $self = shift;
+	my $self = shift;
 
-  # Documentation browser under "/perldoc" (this plugin requires Perl 5.10)
-  $self->plugin('pod_renderer');
+	# Documentation browser under "/perldoc" (this plugin requires Perl 5.10)
+	$self->plugin('pod_renderer');
 
-  # Routes
-  my $r = $self->routes;
+	# Plugins
+	$self->plugin('xslate_renderer');
 
-  # Normal route to controller
-  $r->route('/upload')->to('file#upload');
+	# Routes
+	my $r = $self->routes;
+
+	# Normal route to controller
+	$r->route('/upload')->to('file#upload');
+	$r->route('/view')->to('file#view');
 }
 
 1;
