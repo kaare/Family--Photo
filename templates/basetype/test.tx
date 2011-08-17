@@ -1,0 +1,5 @@
+: $node.row.get_column('title')
+: while $node.children.next -> $child {
+:       $child.get_column('title')
+: }
+

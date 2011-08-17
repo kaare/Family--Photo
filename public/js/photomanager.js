@@ -55,6 +55,14 @@ $(function() {
 						.animate({ height: "36px" });
 			});
 		});
+		var url = $togrp.attr('id').split('_',2)[1];
+		var data = JSON.stringify({photo_id: $item.attr('id')});
+		$.ajax({
+			url: url,
+			contentType: 'application/json',
+			type: 'POST',
+			data: data
+		})
 	}
 
 	// image recycle function
@@ -82,7 +90,7 @@ $(function() {
 			$modal = $( "img[src$='" + src + "']" );
 
 		if ( $modal.length ) {
-			$modal.dialog( "open" );
+			$modal.dialog();
 		} else {
 			var img = $( "<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />" )
 				.attr( "src", src ).appendTo( "body" );
@@ -111,4 +119,6 @@ $(function() {
 
 		return false;
 	});
+
+	$(".trash li").draggable();
 });
