@@ -1,5 +1,12 @@
 $(function() {
 	// there's the gallery and the trash
+	$(".trash li").draggable({
+		cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+		revert: "invalid", // when not dropped, the item will revert back to its initial position
+		containment: $( "#demo-frame" ).length ? "#demo-frame" : "document", // stick to demo-frame if present
+		helper: "clone",
+		cursor: "move"
+	});
 	var $gallery = $( "#gallery" ),
 		$trash = $( ".trash" );
 
@@ -53,8 +60,11 @@ $(function() {
 					.animate({ width: "48px" })
 					.find( "img" )
 						.animate({ height: "36px" });
-			});
+			})
+			.css({"position":"relative", "left": "0px", "top": "0px", "width": "96px"})
+			;
 		});
+
 		var url = $togrp.attr('id').split('_',2)[1];
 		var data = JSON.stringify({photo_id: $item.attr('id')});
 		$.ajax({
@@ -63,6 +73,7 @@ $(function() {
 			type: 'POST',
 			data: data
 		})
+
 	}
 
 	// image recycle function
@@ -71,16 +82,25 @@ $(function() {
 		$item.fadeOut(function() {
 			$item
 				.find( "a.ui-icon-refresh" )
-					.remove()
+				.remove()
 				.end()
-				.css( "width", "96px")
+				.css({"position":"relative", "left": "0px", "top": "0px", "width": "96px"})
 				.append( trash_icon )
 				.find( "img" )
-					.css( "height", "72px" )
+				.css( "height", "72px" )
 				.end()
 				.appendTo( $gallery )
 				.fadeIn();
 		});
+
+		var url = '/scratch';
+		var data = JSON.stringify({photo_id: $item.attr('id')});
+		$.ajax({
+			url: url,
+			contentType: 'application/json',
+			type: 'POST',
+			data: data
+		})
 	}
 
 	// image preview function, demonstrating the ui.dialog used as a modal window
@@ -119,6 +139,4 @@ $(function() {
 
 		return false;
 	});
-
-	$(".trash li").draggable();
 });
