@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+dropdb album
+createdb album
+psql album -f sql/jet.sql
+psql album -f sql/basic.sql
+psql album -f sql/user.sql
+psql album -f fp/photo.sql
+psql album -f fp/data.sql

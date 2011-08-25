@@ -1,13 +1,36 @@
 SET search_path=jet;
 
 INSERT INTO basetype (name) VALUES ('domain');
-INSERT INTO basetype (name,parent) VALUES ('album','{1}');
-INSERT INTO basetype (name,parent, searchable) VALUES ('photo','{2}', '{"filename","metadata"}');
+INSERT INTO basetype (name) VALUES ('directory');
+INSERT INTO basetype (name) VALUES ('usergroup');
+INSERT INTO basetype (name,parent) VALUES ('person','{2,3}');
+INSERT INTO basetype (name,parent) VALUES ('photoalbum','{3,4}'); -- Photoalbums belong to users, but can be assigned to groups
+INSERT INTO basetype (name,parent, searchable) VALUES ('photo','{5}', '{"filename","metadata"}');
 
 SET search_path=data;
 
 INSERT INTO domain_view (part,domainname,title) VALUES ('','family_photo','Family Photo');
-INSERT INTO album_view (part,title,albumname,parent_id) VALUES ('scratch', 'Scratchpad', 'Scratchpad', 1);
-INSERT INTO album_view (part,title,albumname,parent_id) VALUES ('trash', 'Trash', 'Trash', 1);
-INSERT INTO album_view (part,title,albumname,parent_id) VALUES ('Test', 'Test album', 'Test album', 1);
-INSERT INTO photo_view (title,filename,metadata,parent_id) VALUES ('photo','filnavn','metastasisk',2);
+
+INSERT INTO directory_view (part,title,parent_id,directoryname) VALUES ('groups','User Groups', 1, 'Groups');
+
+INSERT INTO usergroup_view (part,title,parent_id,groupname) VALUES ('users', 'All Users', 2, 'All Users');
+INSERT INTO usergroup_view (part,title,parent_id,groupname) VALUES ('rasmussen', 'Rasmussens', 2, 'Rasmussen Family');
+
+INSERT INTO person_view (part,title,parent_id,username,userlogin,password) VALUES ('kaare', 'Kaare', 4, 'Kaare Rasmussen','kaare', 'test');
+
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('scratch', 'Scratchpad', 5, 'Scratchpad');
+UPDATE person SET workalbum_id=6 WHERE id=5
+;
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('trash', 'Trash', 5, 'Trash');
+
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('kaare', 'Test album', 5, 'Test album');
+
+--
+INSERT INTO person_view (part,title,parent_id,username,userlogin,password) VALUES ('fely', 'Fely', 4, 'Fely Rasmussen', 'fely', 'test');
+
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('scratch', 'Scratchpad', 9, 'Scratchpad');
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('trash', 'Trash', 9, 'Trash');
+
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('fely', 'Test album', 9, 'Test album');
+
+INSERT INTO jet.path (parent_id,part,node_id) VALUES (4,'kaare_album',8);
