@@ -1,3 +1,5 @@
+<a href=".">Back</a>
+
 <h2>Upload multiple files</h2>
 <form action='#' method='post' enctype='multipart/form-data'>
   <input name="files" type="file" multiple>

@@ -17,6 +17,7 @@ INSERT INTO usergroup_view (part,title,parent_id,groupname) VALUES ('users', 'Al
 INSERT INTO usergroup_view (part,title,parent_id,groupname) VALUES ('rasmussen', 'Rasmussens', 2, 'Rasmussen Family');
 
 INSERT INTO person_view (part,title,parent_id,username,userlogin,password) VALUES ('kaare', 'Kaare', 4, 'Kaare Rasmussen','kaare', 'test');
+INSERT INTO jet.path (parent_id,part,node_id) VALUES (3,'kaare',5);
 
 INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('scratch', 'Scratchpad', 5, 'Scratchpad');
 UPDATE person SET workalbum_id=6 WHERE id=5
