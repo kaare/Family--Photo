@@ -9,15 +9,13 @@
 </head>
 <body>
 <a href="upload">Upload</a>
-: my $albums = $node.children(base_type => 'photoalbum');
-: my $scratch = $albums.next(1);
-<h1><: $scratch.row.get_column('title') :></h1>
+<h1><: $scratch.row.get_column('albumname') :></h1>
 
 <div class="demo ui-widget ui-helper-clearfix">
 <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
 : my $photos = $scratch.children;
-: while $photos.next(1) -> $photo {
-	<li class="ui-widget-content ui-corner-tr" id="<: $photo.row.get_column('path_id') :>">
+: for $photos -> $photo {
+	<li class="ui-widget-content ui-corner-tr" id="<: $photo.row.get_column('id') :>">
 		<h5 class="ui-widget-header"><: $photo.row.get_column('title') :></h5>
 		<img src="<: $photo.file_location :>?a=1" alt="x<: $photo.row.get_column('shortdesc') :>" width="96" height="72" />
 		<a href="<: $photo.file_location :>" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
@@ -26,16 +24,14 @@
 : }
 </ul>
 
-: while $albums.next(1) -> $album {
-<div id="album_<: $album.uri :>" class="trash ui-widget-content ui-state-default">
+: for $albums -> $album {
+<div id="album:<: $album.uri :>" class="trash ui-widget-content ui-state-default">
 	<h4 class="ui-widget-header"><span class="ui-icon ui-icon-trash"><: $album.row.get_column('title') :></span><: $album.row.get_column('albumname') :></h4>
 
-
-<ul id="gallery_<: $album.row.get_column('id') :>" class="gallery ui-helper-reset ui-helper-clearfix">
+<ul id="gallery:<: $album.row.get_column('id') :>" class="gallery ui-helper-reset ui-helper-clearfix">
 : my $pictures = $album.children(base_type => 'photo');
-: while $pictures.next(1) -> $photo {
-
-	<li style="width: 48px;" class="ui-widget-content ui-corner-tr" id="<: $photo.row.get_column('path_id') :>">
+: for $pictures -> $photo {
+	<li style="width: 48px;" class="ui-widget-content ui-corner-tr" id="<: $photo.row.get_column('id') :>">
 		<h5 class="ui-widget-header"><: $photo.row.get_column('title') :></h5>
 		<img style="display: inline-block; height: 36px;" src="<: $photo.file_location :>?a=1" alt="<: $photo.row.get_column('shortdesc') :>" height="72" width="96">
 		<a href="<: $photo.file_location :>" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
@@ -44,7 +40,6 @@
 
 : }
 </ul>
-
 
 </div>
 : }

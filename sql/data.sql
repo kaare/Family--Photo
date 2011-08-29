@@ -19,7 +19,7 @@ INSERT INTO usergroup_view (part,title,parent_id,groupname) VALUES ('rasmussen',
 INSERT INTO person_view (part,title,parent_id,username,userlogin,password) VALUES ('kaare', 'Kaare', 4, 'Kaare Rasmussen','kaare', 'test');
 INSERT INTO jet.path (parent_id,part,node_id) VALUES (3,'kaare',5);
 
-INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('scratch', 'Scratchpad', 5, 'Scratchpad');
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('scratch', 'Scratchpad', 5, 'Kaare Scratchpad');
 UPDATE person SET workalbum_id=6 WHERE id=5
 ;
 INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('trash', 'Trash', 5, 'Trash');
@@ -29,9 +29,9 @@ INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('kaare', 'T
 --
 INSERT INTO person_view (part,title,parent_id,username,userlogin,password) VALUES ('fely', 'Fely', 4, 'Fely Rasmussen', 'fely', 'test');
 
-INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('scratch', 'Scratchpad', 9, 'Scratchpad');
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('scratch', 'Scratchpad', 9, 'Fely Scratchpad');
 INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('trash', 'Trash', 9, 'Trash');
 
-INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('fely', 'Test album', 9, 'Test album');
+INSERT INTO photoalbum_view (part,title,parent_id,albumname) VALUES ('fely', 'Fely test album', 9, 'Fely test album');
 
 INSERT INTO jet.path (parent_id,part,node_id) VALUES (4,'kaare_album',8);

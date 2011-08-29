@@ -5,18 +5,18 @@ BEGIN;
 SET search_path TO data;
 
 CREATE TABLE domain (
-	id						 int NOT NULL PRIMARY KEY
-	                         REFERENCES jet.node
-									 ON DELETE cascade
-									 ON UPDATE cascade,
-	domainname				 text
+	id						int NOT NULL PRIMARY KEY
+	                        REFERENCES jet.node
+							ON DELETE cascade
+							ON UPDATE cascade,
+	domainname				text
 );
 
 CREATE OR REPLACE VIEW domain_view AS
 SELECT
 	d.*,
 	n.title,
-	p.part,p.node_path,parent_id
+	p.id path_id, p.part,p.node_path,parent_id
 FROM
 	data.domain d
 JOIN
@@ -44,7 +44,7 @@ CREATE OR REPLACE VIEW photoalbum_view AS
 SELECT
 	d.*,
 	n.title,
-	p.part,p.node_path,parent_id
+	p.id path_id, p.part,p.node_path,parent_id
 FROM
 	photoalbum d
 JOIN
@@ -74,7 +74,7 @@ CREATE VIEW photo_view AS
 SELECT
 	d.*,
 	n.title,
-	p.part,p.node_path,parent_id
+	p.id path_id, p.part,p.node_path,parent_id
 FROM
 	photo d
 JOIN

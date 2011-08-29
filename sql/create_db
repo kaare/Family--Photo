@@ -6,3 +6,4 @@ psql album -f sql/basic.sql
 psql album -f sql/user.sql
 psql album -f fp/photo.sql
 psql album -f fp/data.sql
+prototype/recipe
